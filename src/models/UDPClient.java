@@ -1,28 +1,33 @@
 package models;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.*;
-import java.util.Scanner;
 
-class UDPClient
+
+public class UDPClient
 {
-    public static void main(String args[]) throws Exception
-    {
-        BufferedReader inFromUser =
-                new BufferedReader(new InputStreamReader(System.in));
+    String toSend;
+
+    public UDPClient(String _toSend) {
+        toSend = _toSend;
+        try {
+            sendData();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void sendData() throws IOException {
         DatagramSocket clientSocket = new DatagramSocket();
 
-//        System.out.println("Enter host IP");
-//        String ip=inFromUser.readLine();
-        //System.err.println(ip);
 //"localhost"
         InetAddress IPAddress = InetAddress.getByName("192.168.43.52");
         byte[] sendData;
-//        byte[] receiveData = new byte[1024];
-        String sentence = inFromUser.readLine();
+        String sentence;
         Netstrings netstring = new Netstrings();
-        sentence = netstring.encodedNetString(sentence);
+        sentence = netstring.encodedNetString(toSend);
         System.out.println(sentence);
         sendData = sentence.getBytes();
         DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, 8888);

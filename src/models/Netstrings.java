@@ -8,7 +8,7 @@ public class Netstrings {
         if (plainInput.isEmpty()) throw new NullPointerException();
 
         //return a NetString in the form of [len]":"[string]","
-        return plainInput.length() + ":" + plainInput + ",";
+        return plainInput.length() + ":" + plainInput.substring(0,1) + "/" + plainInput.substring(1) + ",";
     }
 
 //    public String decodedNetString(String netString)
