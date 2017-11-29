@@ -8,10 +8,11 @@ import java.net.*;
 
 public class UDPClient
 {
-    String toSend;
+    private String toSend, ip;
 
-    public UDPClient(String _toSend) {
-        toSend = _toSend;
+    public UDPClient(String _toSend, String ip) {
+        this.toSend = _toSend;
+        this.ip = ip;
         try {
             sendData();
         } catch (IOException e) {
@@ -23,7 +24,7 @@ public class UDPClient
         DatagramSocket clientSocket = new DatagramSocket();
 
 //"localhost"
-        InetAddress IPAddress = InetAddress.getByName("192.168.43.52");
+        InetAddress IPAddress = InetAddress.getByName(ip);
         byte[] sendData;
         String sentence;
         Netstrings netstring = new Netstrings();

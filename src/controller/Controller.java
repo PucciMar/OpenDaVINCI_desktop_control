@@ -23,6 +23,7 @@ public class Controller {
     public Text dCurr;
 
     private String toSend;
+    private String ipToSend;
 
 
     public TextField ip;
@@ -34,18 +35,21 @@ public class Controller {
     public void sendPackage(ActionEvent actionEvent) {
         if (!p.getEditor().getText().isEmpty()) {
             toSend = "p" + p.getEditor().getText();
-            UDPClient udPclient = new UDPClient(toSend);
+            ipToSend = ip.getText();
+            UDPClient udPclient = new UDPClient(toSend, ipToSend);
             pCurr.setText(p.getEditor().getText());
 
         }
         if (!i.getEditor().getText().isEmpty()) {
             toSend = "i" + i.getEditor().getText();
-            UDPClient udPclient = new UDPClient(toSend);
+            ipToSend = ip.getText();
+            UDPClient udPclient = new UDPClient(toSend, ipToSend);
             iCurr.setText(i.getEditor().getText());
         }
         if (!d.getEditor().getText().isEmpty()) {
             toSend = "d" + d.getEditor().getText();
-            UDPClient udPclient = new UDPClient(toSend);
+            ipToSend = ip.getText();
+            UDPClient udPclient = new UDPClient(toSend, ipToSend);
             dCurr.setText(d.getEditor().getText());
         }
     }
