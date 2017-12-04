@@ -1,110 +1,237 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<GridPane alignment="center" hgap="10" prefHeight="398.0" prefWidth="411.0" vgap="10" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Controller">
-   <columnConstraints>
-      <ColumnConstraints />
-   </columnConstraints>
-   <rowConstraints>
-      <RowConstraints />
-      <RowConstraints />
-      <RowConstraints />
-      <RowConstraints minHeight="10.0" prefHeight="30.0" />
-   </rowConstraints>
-   <children>
-      <AnchorPane>
-         <children>
-            <BorderPane prefHeight="397.0" prefWidth="404.0">
-               <bottom>
-                  <HBox prefHeight="33.0" prefWidth="404.0" BorderPane.alignment="CENTER">
-                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="P">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Text>
-                        <Spinner fx:id="p" editable="true" />
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="I" textAlignment="CENTER" wrappingWidth="17.800048828125">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Text>
-                        <Spinner fx:id="i" editable="true" />
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="D" textAlignment="CENTER" wrappingWidth="15.40008544921875">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Text>
-                        <Spinner fx:id="d" editable="true" />
-                     </children>
-                  </HBox>
-               </bottom>
-               <center>
-                  <ImageView fx:id="imageView" fitHeight="269.0" fitWidth="293.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
-               </center>
-               <left>
-                  <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
-                     <children>
-                        <Button mnemonicParsing="false" text="Button" />
-                        <Button mnemonicParsing="false" text="Button" />
-                        <Button mnemonicParsing="false" text="Button" />
-                        <Button mnemonicParsing="false" text="Button" />
-                        <Button fx:id="send" mnemonicParsing="false" onAction="#sendPackage" text="Send" />
-                     </children>
-                  </VBox>
-               </left>
-               <top>
-                  <TextField fx:id="ip" prefHeight="26.0" prefWidth="332.0" BorderPane.alignment="CENTER" />
-               </top>
-            </BorderPane>
-         </children>
-      </AnchorPane>
-      <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
-         <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Current P   ">
-               <font>
-                  <Font size="11.0" />
-               </font>
-            </Text>
-            <Text fx:id="pCurr" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="63.736634850502014">
-               <font>
-                  <Font size="11.0" />
-               </font>
-            </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Current I   " wrappingWidth="54.13671875">
-               <font>
-                  <Font size="11.0" />
-               </font>
-            </Text>
-            <Text fx:id="iCurr" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="67.99999856948853">
-               <font>
-                  <Font size="11.0" />
-               </font>
-            </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Current D   " wrappingWidth="69.79840087890625">
-               <font>
-                  <Font size="11.0" />
-               </font>
-            </Text>
-            <Text fx:id="dCurr" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="60.0">
-               <font>
-                  <Font size="11.0" />
-               </font>
-            </Text>
-         </children>
-      </HBox>
-   </children>
-</GridPane>
+<AnchorPane style="-fx-background-color: linear-gradient(#686868 0%, #232723 25%, #373837 75%, #757575 100%),        linear-gradient(#020b02, #3a3a3a),        linear-gradient(#9d9e9d 0%, #6b6a6b 20%, #343534 80%, #242424 100%),        linear-gradient(#8a8a8a 0%, #6b6a6b 20%, #343534 80%, #262626 100%),        linear-gradient(#777777 0%, #606060 50%, #505250 51%, #2a2b2a 100%);; -fx-background-insets: 0,1,4,5,6;; -fx-padding: 15 30 15 30;;" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Controller">
+    <children>
+        <BorderPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <center>
+                <GridPane fx:id="gridImage" gridLinesVisible="true" BorderPane.alignment="CENTER">
+                    <BorderPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                    </BorderPane.margin>
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <children>
+                        <ImageView fx:id="imageView" fitHeight="480.0" fitWidth="752.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                     <effect>
+                        <DropShadow height="0.0" radius="14.615" spread="0.23" width="60.46">
+                           <input>
+                              <InnerShadow choke="0.67" height="39.21" radius="16.83" width="30.11" />
+                           </input>
+                        </DropShadow>
+                     </effect>
+                     <cursor>
+                        <Cursor fx:constant="NONE" />
+                     </cursor></ImageView>
+                    </children>
+                </GridPane>
+            </center>
+            <left>
+                <GridPane prefHeight="247.0" prefWidth="62.0" vgap="5.0" BorderPane.alignment="CENTER">
+                    <columnConstraints>
+                        <ColumnConstraints />
+                    </columnConstraints>
+                    <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="BOTTOM" vgrow="NEVER" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="BOTTOM" vgrow="NEVER" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="BOTTOM" vgrow="NEVER" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="BOTTOM" vgrow="NEVER" />
+                        <RowConstraints minHeight="10.0" valignment="BOTTOM" vgrow="NEVER" />
+                        <RowConstraints valignment="BOTTOM" vgrow="NEVER" />
+                  <RowConstraints vgrow="NEVER" />
+                        <RowConstraints valignment="BOTTOM" vgrow="NEVER" />
+                        <RowConstraints valignment="BOTTOM" vgrow="NEVER" />
+                  <RowConstraints vgrow="NEVER" />
+                  <RowConstraints vgrow="NEVER" />
+                  <RowConstraints vgrow="NEVER" />
+                    </rowConstraints>
+                    <children>
+                        <Button fx:id="stop" mnemonicParsing="false" onAction="#sendFunction" prefHeight="45.0" prefWidth="62.0" stylesheets="@stopStyle.css" text="Stop" GridPane.rowIndex="6">
+                            <GridPane.margin>
+                                <Insets right="5.0" />
+                            </GridPane.margin>
+                        </Button>
+                        <Button fx:id="lane" mnemonicParsing="false" onAction="#sendFunction" prefHeight="44.0" prefWidth="62.0" stylesheets="@functionStyle.css" text="L" GridPane.rowIndex="9">
+                            <GridPane.margin>
+                                <Insets right="5.0" />
+                            </GridPane.margin>
+                        </Button>
+                        <Button fx:id="park" mnemonicParsing="false" onAction="#sendFunction" prefHeight="46.0" prefWidth="62.0" stylesheets="@functionStyle.css" text="P" GridPane.rowIndex="10">
+                            <GridPane.margin>
+                                <Insets right="5.0" />
+                            </GridPane.margin>
+                        </Button>
+                        <Button fx:id="overtake" mnemonicParsing="false" onAction="#sendFunction" prefHeight="44.0" prefWidth="62.0" stylesheets="@functionStyle.css" text="O" textOverrun="CLIP" GridPane.rowIndex="11">
+                            <GridPane.margin>
+                                <Insets right="5.0" />
+                            </GridPane.margin>
+                        </Button>
+                  <Label fx:id="p_sender" style="-fx-text-fill: white; -fx-font-size: 13; -fx-font-weight: bold; -fx-effect: dropshadow( one-pass-box , rgba(0,0,0,0.8) , 0, 0.0 , 0 , 1);;" GridPane.halignment="LEFT" GridPane.valignment="TOP" />
+                    </children>
+                </GridPane>
+            </left>
+            <top>
+                <GridPane>
+                    <columnConstraints>
+                  <ColumnConstraints hgrow="NEVER" minWidth="10.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <children>
+                        <TextField fx:id="ip" onAction="#getIPAndPort" prefHeight="26.0" prefWidth="332.0" GridPane.columnIndex="2" GridPane.valignment="BOTTOM">
+                            <GridPane.margin>
+                                <Insets bottom="5.0" right="5.0" top="5.0" />
+                            </GridPane.margin>
+                        </TextField>
+                        <Label style="-fx-text-fill: white; -fx-effect: dropshadow( one-pass-box , white , 0, 0.0 , 0 , 1 ); -fx-font-size: 20;" text="Host" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
+                            <GridPane.margin>
+                                <Insets right="4.0" top="12.0" />
+                            </GridPane.margin>
+                        </Label>
+                  <Button fx:id="connect" mnemonicParsing="false" onAction="#connect" stylesheets="@connectStyle.css" text="Connect" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="BOTTOM" GridPane.vgrow="NEVER">
+                     <GridPane.margin>
+                        <Insets bottom="10.0" right="80.0" />
+                     </GridPane.margin>
+                  </Button>
+                  <Label style="-fx-text-fill: white; -fx-font-size: 13; -fx-font-weight: bold; -fx-effect: dropshadow( one-pass-box , rgba(0,0,0,0.8) , 0, 0.0 , 0 , 1);;" text="Please after entering the IP:PORT_receiver:PORT_sender and hit enter!" GridPane.columnIndex="2" GridPane.valignment="TOP">
+                     <GridPane.margin>
+                        <Insets bottom="4.0" right="5.0" top="2.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <Label fx:id="connectStatus" style="-fx-text-fill: white; -fx-font-size: 13; -fx-font-weight: bold; -fx-effect: dropshadow( one-pass-box , rgba(0,0,0,0.8) , 0, 0.0 , 0 , 1);;" text="Disconnected" GridPane.halignment="LEFT" GridPane.valignment="TOP" />
+                  <Label fx:id="connectedFeed" style="-fx-text-fill: white; -fx-font-size: 10; -fx-font-weight: bold; -fx-effect: dropshadow( one-pass-box , rgba(0,0,0,0.8) , 0, 0.0 , 0 , 1);;" text="HOST IS NOT SET!" GridPane.halignment="LEFT" GridPane.rowSpan="2147483647" />
+                  <Label fx:id="p_receiver" style="-fx-text-fill: white; -fx-font-size: 13; -fx-font-weight: bold; -fx-effect: dropshadow( one-pass-box , rgba(0,0,0,0.8) , 0, 0.0 , 0 , 1);;" GridPane.halignment="LEFT" GridPane.valignment="BOTTOM" />
+                    </children>
+                </GridPane>
+            </top>
+         <bottom>
+            <GridPane BorderPane.alignment="BOTTOM_LEFT">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="NEVER" />
+                  <ColumnConstraints halignment="CENTER" hgrow="NEVER" />
+                  <ColumnConstraints hgrow="NEVER" />
+                  <ColumnConstraints halignment="CENTER" hgrow="NEVER" />
+                  <ColumnConstraints hgrow="NEVER" />
+                  <ColumnConstraints halignment="CENTER" hgrow="NEVER" />
+                  <ColumnConstraints halignment="CENTER" hgrow="NEVER" maxWidth="147.0" minWidth="10.0" prefWidth="99.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints minHeight="10.0" vgrow="NEVER" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
+               </rowConstraints>
+               <children>
+                  <Spinner fx:id="i" editable="true" stylesheets="@spinnerStyle.css" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: &quot;Helvetica&quot;; -fx-fill: white; -fx-effect: dropshadow( one-pass-box , rgba(0,0,0,0.8) , 0, 0.0 , 0 , -1 ); -fx-font-size: 20;" text="I" textAlignment="CENTER" wrappingWidth="17.800048828125" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets left="5.0" right="5.0" />
+                     </GridPane.margin>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: &quot;Helvetica&quot;; -fx-fill: white; -fx-effect: dropshadow( one-pass-box , rgba(0,0,0,0.8) , 0, 0.0 , 0 , -1 ); -fx-font-size: 20;" text="P" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets left="5.0" right="5.0" />
+                     </GridPane.margin>
+                  </Text>
+                  <Spinner fx:id="p" editable="true" stylesheets="@spinnerStyle.css" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: &quot;Helvetica&quot;; -fx-fill: white; -fx-effect: dropshadow( one-pass-box , rgba(0,0,0,0.8) , 0, 0.0 , 0 , -1 ); -fx-font-size: 20;" text="D" textAlignment="CENTER" wrappingWidth="15.40008544921875" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets left="5.0" right="5.0" />
+                     </GridPane.margin>
+                  </Text>
+                  <Spinner fx:id="d" editable="true" stylesheets="@spinnerStyle.css" GridPane.columnIndex="5" GridPane.rowIndex="3">
+                     <GridPane.margin>
+                        <Insets right="2.0" />
+                     </GridPane.margin>
+                  </Spinner>
+                  <Button fx:id="send" mnemonicParsing="false" onAction="#sendPIDPackage" prefHeight="32.0" prefWidth="116.0" stylesheets="@sendStyle.css" text="SEND" GridPane.columnIndex="6" GridPane.halignment="RIGHT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
+                     <GridPane.margin>
+                        <Insets left="2.0" right="2.0" />
+                     </GridPane.margin>
+                  </Button>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: white; -fx-effect: dropshadow( one-pass-box , rgba(0,0,0,0.8) , 0, 0.0 , 0 , -1 ); -fx-font-size: 14;" text="Cur. P   " textAlignment="RIGHT" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets left="5.0" right="5.0" />
+                     </GridPane.margin>
+                  </Text>
+                  <Text fx:id="pCurr" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 14; -fx-fill: white; -fx-effect: dropshadow( one-pass-box , white , 0, 0.0 , 0 , 1 );;" wrappingWidth="63.736634850502014" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="4">
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: white; -fx-effect: dropshadow( one-pass-box , rgba(0,0,0,0.8) , 0, 0.0 , 0 , -1 ); -fx-font-size: 14;" text="Cur. I   " textAlignment="RIGHT" wrappingWidth="54.13671875" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets left="5.0" right="5.0" />
+                     </GridPane.margin>
+                  </Text>
+                  <Text fx:id="iCurr" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 14; -fx-fill: white; -fx-effect: dropshadow( one-pass-box , white , 0, 0.0 , 0 , 1 );;" wrappingWidth="67.99999856948853" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="4">
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: white; -fx-effect: dropshadow( one-pass-box , rgba(0,0,0,0.8) , 0, 0.0 , 0 , -1 ); -fx-font-size: 14;" text="Cur. D   " textAlignment="RIGHT" wrappingWidth="69.79840087890625" GridPane.columnIndex="4" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets left="5.0" right="5.0" />
+                     </GridPane.margin>
+                  </Text>
+                  <Text fx:id="dCurr" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 14; -fx-fill: white; -fx-effect: dropshadow( one-pass-box , white , 0, 0.0 , 0 , 1 );;" wrappingWidth="60.0" GridPane.columnIndex="5" GridPane.halignment="LEFT" GridPane.rowIndex="4">
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Text>
+                  <Label fx:id="feedbackOutput" opacity="0.37" style="-fx-font-family: &quot;Helvetica&quot;; -fx-text-fill: white; -fx-effect: dropshadow( gaussian , #a30000 , 0,0,0,2 );;" text="" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2">
+                     <GridPane.margin>
+                        <Insets bottom="5.0" />
+                     </GridPane.margin>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+            </GridPane>
+         </bottom>
+        </BorderPane>
+    </children>
+</AnchorPane>

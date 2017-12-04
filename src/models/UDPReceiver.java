@@ -1,59 +1,113 @@
 package models;
 
-import javafx.scene.image.ImageView;
-
 import javax.imageio.ImageIO;
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
-import java.net.InetAddress;
+import java.net.InetSocketAddress;
+import java.util.Observable;
 
-public class UDPReceiver {
-    private Image img;
-    public ImageView imgView;
+public class UDPReceiver extends Observable
+{
+    private DatagramSocket socket;
+    private int timeout = 10000;
 
-    public UDPReceiver() throws IOException {
-        System.out.println("Initialized");
-        receiveBytes();
+    private boolean isRunning;
+
+    private volatile long lastReadTime;
+
+    private BufferedImage img;
+    private String IP;
+    private int PORT;
+    private FeedbackMessage feedback_message;
+
+    public UDPReceiver(String ip_address, int port) throws IOException
+    {
+        if (ip_address.isEmpty() || port <= 0) throw new IllegalArgumentException();
+        this.IP = ip_address;
+        this.PORT = port;
     }
 
-    private void receiveBytes() throws IOException {
+    public void receiveBytes() throws IOException
+    {
+        feedback_message = new FeedbackMessage();
+        feedback_message.setMessage("Initialized UPD receiver on " + IP + ":" + PORT + " . . .");
+        setChanged();
+        notifyObservers(feedback_message);
+
+        System.out.println(feedback_message.getMessage());
         Thread thread = new Thread(() ->
         {
-            try{
-                DatagramSocket socket = new DatagramSocket();
+            try
+            {
+                socket = new DatagramSocket(null);
+                socket.setSoTimeout(timeout);
+                InetSocketAddress address = new InetSocketAddress(IP, PORT);
+                socket.bind(address);
+
+                feedback_message = new FeedbackMessage();
+                feedback_message.setMessage("Connected");
+                setChanged();
+                notifyObservers(feedback_message);
 
                 byte[] buf = new byte[60000];
                 DatagramPacket packet = new DatagramPacket(buf, buf.length);
-                while (true) {
+
+                while (isConnectionAlive() && isRunning)
+                {
                     socket.receive(packet);
+                    lastReadTime = System.currentTimeMillis();
 
                     // display response
                     String received = new String(packet.getData());
-                    System.out.println("Quote of the Moment: " + received);
-
+                    System.out.println("Quote of the Moment: received " + received);
 
                     buf = packet.getData();
 
                     img = ImageIO.read(new ByteArrayInputStream(buf));
-
-                    setImage(img);
+                    if (img != null)
+                    {
+                        setChanged();
+                        notifyObservers(img);
+                    }
                 }
-
-                //      socket.close();
-            }catch(Exception e)
-            {
-                e.printStackTrace();
             }
+            catch (Exception e)
+            {
+                e.printStackTrace(); //TODO delete after debug
+                socket.close();
+                feedback_message.setMessage("VIDEO CONNECTION LOST!");
+                setChanged();
+                notifyObservers(feedback_message);
 
+                feedback_message = new FeedbackMessage();
+                feedback_message.setMessage("Connected");
+                setChanged();
+                notifyObservers(feedback_message);
+            }
+//"CONNECTION TERMINATED!"
         });
+        isRunning = true;
+        thread.start();
     }
 
-    private void setImage(Image img){
-        // No idea if this will work, needs testing
-        imgView.setImage(javafx.scene.image.Image.impl_fromPlatformImage(img));
+    public void disconnect()
+    {
+        isRunning = false;
+        socket.disconnect();
+        socket.close();
+
+        feedback_message = new FeedbackMessage();
+        feedback_message.setMessage("Disconnected");
+        setChanged();
+        notifyObservers(feedback_message);
+    }
+
+    private boolean isConnectionAlive()
+    {
+        int maxTimeout = 25000;
+        return System.currentTimeMillis() - lastReadTime < maxTimeout;
     }
 }
